@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+Feature enhancements:
+
+* [FEATURE #2708](https://github.com/BurntSushi/ripgrep/pull/2708):
+  Completions for the fish shell take ripgrep's config file into account.
+
 
 14.1.1 (2024-09-08)
 ===================
