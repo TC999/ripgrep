@@ -13,6 +13,7 @@ use {
 };
 
 use crate::{
+    i18n::fl,
     flags::lowargs::{
         BinaryMode, BoundaryMode, BufferMode, CaseMode, ColorChoice,
         ContextMode, ContextSeparator, EncodingMode, EngineChoice,
@@ -987,11 +988,11 @@ impl Patterns {
         if low.patterns.is_empty() {
             anyhow::ensure!(
                 !low.positional.is_empty(),
-                "ripgrep requires at least one pattern to execute a search"
+                fl!(crate::i18n::LANGUAGE_LOADER, "pattern_required")
             );
             let ospat = low.positional.remove(0);
             let Ok(pat) = ospat.into_string() else {
-                anyhow::bail!("pattern given is not valid UTF-8")
+                anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "pattern_invalid_utf8"))
             };
             return Ok(Patterns { patterns: vec![pat] });
         }

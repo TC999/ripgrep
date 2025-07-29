@@ -1,0 +1,9 @@
+# Configuration for i18n-embed
+fallback_language = "en_US"
+
+[fluent]
+assets_dir = "i18n"
+
+[languages]
+[languages.en_US]
+[languages.zh_CN]
