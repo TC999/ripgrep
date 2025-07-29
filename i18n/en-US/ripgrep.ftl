@@ -1,2 +1,12 @@
 pattern_required = ripgrep requires at least one pattern to execute a search
 pattern_invalid_utf8 = pattern given is not valid UTF-8
+no_files_searched = No files were searched, which means ripgrep probably applied a filter you didn't expect.
+no_files_searched_debug = Running with --debug will show why files are being skipped.
+stats_matches = matches
+stats_matched_lines = matched lines
+stats_files_with_matches = files contained matches
+stats_files_searched = files searched
+stats_bytes_printed = bytes printed
+stats_bytes_searched = bytes searched
+stats_search_time = seconds spent searching
+stats_process_time = seconds

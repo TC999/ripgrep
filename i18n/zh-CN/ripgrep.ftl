@@ -1,2 +1,12 @@
 pattern_required = ripgrep 至少需要一个搜索模式
 pattern_invalid_utf8 = 提供的模式不是有效的 UTF-8
+no_files_searched = 没有搜索任何文件，这意味着 ripgrep 可能应用了您没有预期的过滤器。
+no_files_searched_debug = 使用 --debug 运行将显示文件被跳过的原因。
+stats_matches = 匹配
+stats_matched_lines = 匹配的行
+stats_files_with_matches = 包含匹配的文件
+stats_files_searched = 搜索的文件
+stats_bytes_printed = 打印的字节
+stats_bytes_searched = 搜索的字节
+stats_search_time = 搜索耗时（秒）
+stats_process_time = 处理时间（秒）

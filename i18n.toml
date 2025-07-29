@@ -7,3 +7,7 @@ assets_dir = "i18n"
 [languages]
 [languages.en_US]
 [languages.zh_CN]
+[languages.es_ES]
+[languages.fr_FR]
+[languages.de_DE]
+[languages.ja_JP]

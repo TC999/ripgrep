@@ -1,0 +1,12 @@
+pattern_required = ripgrep は検索を実行するために少なくとも 1 つのパターンが必要です
+pattern_invalid_utf8 = 指定されたパターンが有効な UTF-8 ではありません
+no_files_searched = ファイルが検索されませんでした。これは ripgrep が予期しないフィルターを適用したことを意味します。
+no_files_searched_debug = --debug を付けて実行すると、ファイルがスキップされる理由が表示されます。
+stats_matches = 一致
+stats_matched_lines = 一致した行
+stats_files_with_matches = 一致を含むファイル
+stats_files_searched = 検索されたファイル
+stats_bytes_printed = 出力されたバイト
+stats_bytes_searched = 検索されたバイト
+stats_search_time = 検索時間（秒）
+stats_process_time = 処理時間（秒）

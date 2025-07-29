@@ -7,6 +7,7 @@ use std::{io::Write, process::ExitCode};
 use ignore::WalkState;
 
 use crate::flags::{HiArgs, SearchMode};
+use crate::i18n::fl;
 
 #[macro_use]
 mod messages;
@@ -417,9 +418,9 @@ fn special(mode: crate::flags::SpecialMode) -> anyhow::Result<ExitCode> {
 /// noisy, e.g., when it is intended that there is nothing to search.
 fn eprint_nothing_searched() {
     err_message!(
-        "No files were searched, which means ripgrep probably \
-         applied a filter you didn't expect.\n\
-         Running with --debug will show why files are being skipped."
+        "{}\n{}",
+        fl!(crate::i18n::LANGUAGE_LOADER, "no_files_searched"),
+        fl!(crate::i18n::LANGUAGE_LOADER, "no_files_searched_debug")
     );
 }
 
@@ -465,23 +466,31 @@ fn print_stats<W: Write>(
         write!(
             wtr,
             "
-{matches} matches
-{lines} matched lines
-{searches_with_match} files contained matches
-{searches} files searched
-{bytes_printed} bytes printed
-{bytes_searched} bytes searched
-{search_time:0.6} seconds spent searching
-{process_time:0.6} seconds
+{matches} {matches_label}
+{lines} {lines_label}
+{searches_with_match} {files_with_matches_label}
+{searches} {files_searched_label}
+{bytes_printed} {bytes_printed_label}
+{bytes_searched} {bytes_searched_label}
+{search_time:0.6} {search_time_label}
+{process_time:0.6} {process_time_label}
 ",
             matches = stats.matches(),
+            matches_label = fl!(crate::i18n::LANGUAGE_LOADER, "stats_matches"),
             lines = stats.matched_lines(),
+            lines_label = fl!(crate::i18n::LANGUAGE_LOADER, "stats_matched_lines"),
             searches_with_match = stats.searches_with_match(),
+            files_with_matches_label = fl!(crate::i18n::LANGUAGE_LOADER, "stats_files_with_matches"),
             searches = stats.searches(),
+            files_searched_label = fl!(crate::i18n::LANGUAGE_LOADER, "stats_files_searched"),
             bytes_printed = stats.bytes_printed(),
-            bytes_searched = stats.bytes_searched(),
+            bytes_printed_label = fl!(crate::i18n::LANGUAGE_LOADER, "stats_bytes_printed"),
+            bytes_searched = stats.bytes_searched(),  
+            bytes_searched_label = fl!(crate::i18n::LANGUAGE_LOADER, "stats_bytes_searched"),
             search_time = stats.elapsed().as_secs_f64(),
+            search_time_label = fl!(crate::i18n::LANGUAGE_LOADER, "stats_search_time"),
             process_time = elapsed.as_secs_f64(),
+            process_time_label = fl!(crate::i18n::LANGUAGE_LOADER, "stats_process_time"),
         )
     }
 }
