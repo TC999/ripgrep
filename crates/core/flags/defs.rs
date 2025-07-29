@@ -2411,7 +2411,7 @@ The output is written to \fBstdout\fP. The list above may expand over time.
             "complete-zsh" => GenerateMode::CompleteZsh,
             "complete-fish" => GenerateMode::CompleteFish,
             "complete-powershell" => GenerateMode::CompletePowerShell,
-            unk => anyhow::bail!("choice '{unk}' is unrecognized"),
+            unk => anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_choice_unk_is_unrecognized", unk = unk)),
         };
         args.mode.update(Mode::Generate(genmode));
         Ok(())
@@ -6268,7 +6268,7 @@ parallelism and run in a single thread.
             "modified" => SortModeKind::LastModified,
             "accessed" => SortModeKind::LastAccessed,
             "created" => SortModeKind::Created,
-            unk => anyhow::bail!("choice '{unk}' is unrecognized"),
+            unk => anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_choice_unk_is_unrecognized", unk = unk)),
         };
         args.sort = Some(SortMode { reverse: false, kind });
         Ok(())
@@ -6370,7 +6370,7 @@ parallelism and run in a single thread.
             "modified" => SortModeKind::LastModified,
             "accessed" => SortModeKind::LastAccessed,
             "created" => SortModeKind::Created,
-            unk => anyhow::bail!("choice '{unk}' is unrecognized"),
+            unk => anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_choice_unk_is_unrecognized", unk = unk)),
         };
         args.sort = Some(SortMode { reverse: true, kind });
         Ok(())

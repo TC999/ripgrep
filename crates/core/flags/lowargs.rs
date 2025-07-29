@@ -592,8 +592,7 @@ impl FieldContextSeparator {
     pub(crate) fn new(os: &OsStr) -> anyhow::Result<FieldContextSeparator> {
         let Some(string) = os.to_str() else {
             anyhow::bail!(
-                "separator must be valid UTF-8 (use escape sequences \
-                 to provide a separator that is not valid UTF-8)"
+                fl!(crate::i18n::LANGUAGE_LOADER, "error_separator_must_be_valid")
             )
         };
         Ok(FieldContextSeparator(Vec::unescape_bytes(string).into()))
@@ -626,8 +625,7 @@ impl FieldMatchSeparator {
     pub(crate) fn new(os: &OsStr) -> anyhow::Result<FieldMatchSeparator> {
         let Some(string) = os.to_str() else {
             anyhow::bail!(
-                "separator must be valid UTF-8 (use escape sequences \
-                 to provide a separator that is not valid UTF-8)"
+                fl!(crate::i18n::LANGUAGE_LOADER, "error_separator_must_be_valid")
             )
         };
         Ok(FieldMatchSeparator(Vec::unescape_bytes(string).into()))

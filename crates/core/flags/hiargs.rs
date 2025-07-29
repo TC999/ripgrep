@@ -448,7 +448,7 @@ impl HiArgs {
         #[cfg(not(feature = "pcre2"))]
         {
             Err(anyhow::anyhow!(
-                "PCRE2 is not available in this build of ripgrep"
+                fl!(crate::i18n::LANGUAGE_LOADER, "pcre2_is_not_available")
             ))
         }
     }
