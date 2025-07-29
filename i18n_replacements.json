@@ -1,106 +1,106 @@
 {
-  "./crates/core/flags/parse.rs": [
-    {
-      "line": 414,
-      "original": "\"similar flags that are available: {list}\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_similar_flags_that_are\")",
-      "context": "Some(format!(\"similar flags that are available: {list}\"))"
-    }
-  ],
-  "./crates/core/flags/lowargs.rs": [
+  "crates/core/flags/lowargs.rs": [
     {
       "line": 738,
       "original": "\"sorting by creation time isn't supported: {err}\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"error_sorting_by_creation_time\")",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"error_sorting_by_creation_time_2\")",
       "context": "anyhow::bail!("
     }
   ],
-  "./crates/core/flags/defs.rs": [
+  "crates/core/flags/defs.rs": [
     {
       "line": 7434,
       "original": "\"Show matches surrounded by word boundaries.\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"show_matches_surrounded_by\")",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"show_matches_surrounded_by_2\")",
       "context": "r\"Show matches surrounded by word boundaries.\""
     }
   ],
-  "./crates/core/i18n.rs": [
+  "crates/core/flags/parse.rs": [
+    {
+      "line": 414,
+      "original": "\"similar flags that are available: {list}\"",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_similar_flags_that_are_2\")",
+      "context": "Some(format!(\"similar flags that are available: {list}\"))"
+    }
+  ],
+  "crates/core/i18n.rs": [
     {
       "line": 22,
       "original": "\"Error while loading fallback language\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"error_while_loading_fallback\")",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"error_while_loading_fallback_2\")",
       "context": "loader.load_fallback_language(&Localizations).expect(\"Error while loading fallback language\");"
     }
   ],
-  "./crates/grep/examples/simplegrep.rs": [
+  "crates/grep/examples/simplegrep.rs": [
     {
       "line": 24,
       "original": "\"Usage: simplegrep <pattern> [<path> ...]\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"error_usage_simplegrep_pattern_path\")",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"error_usage_simplegrep_pattern_path_2\")",
       "context": "return Err(\"Usage: simplegrep <pattern> [<path> ...]\".into());"
     }
   ],
-  "./crates/core/main.rs": [
+  "crates/core/main.rs": [
     {
       "line": 459,
       "original": "\"{:0.6}s\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_06s\")",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_06s_2\")",
       "context": "\"human\": format!(\"{:0.6}s\", elapsed.as_secs_f64()),"
     }
   ],
-  "./crates/core/search.rs": [
+  "crates/core/search.rs": [
     {
       "line": 318,
       "original": "\"preprocessor command failed: '{:?}': {}\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_preprocessor_command_failed\")",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_preprocessor_command_failed_2\")",
       "context": "format!(\"preprocessor command failed: '{:?}': {}\", cmd, err),"
     }
   ],
-  "./crates/core/flags/hiargs.rs": [
+  "crates/core/flags/hiargs.rs": [
     {
       "line": 451,
       "original": "\"PCRE2 is not available in this build of ripgrep\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"pcre2_is_not_available\")",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"pcre2_is_not_available_2\")",
       "context": "\"PCRE2 is not available in this build of ripgrep\""
     }
   ],
-  "./crates/core/flags/doc/version.rs": [
-    {
-      "line": 72,
-      "original": "\"PCRE2 is not available in this build of ripgrep.\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"pcre2_is_not_available\")",
-      "context": "writeln!(out, \"PCRE2 is not available in this build of ripgrep.\")"
-    }
-  ],
-  "./crates/core/flags/doc/man.rs": [
-    {
-      "line": 105,
-      "original": "\"This flag can be disabled with \\fB\\-\\-{negated}\\fP.\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"this_flag_can_be\")",
-      "context": "r\"This flag can be disabled with \\fB\\-\\-{negated}\\fP.\""
-    }
-  ],
-  "./crates/core/flags/doc/help.rs": [
-    {
-      "line": 245,
-      "original": "\"{line}:\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_line\")",
-      "context": "lines.push(format!(\"{line}:\"));"
-    }
-  ],
-  "./crates/core/flags/complete/bash.rs": [
-    {
-      "line": 97,
-      "original": "\"--{negated}\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_negated\")",
-      "context": "let name = format!(\"--{negated}\");"
-    }
-  ],
-  "./crates/core/flags/complete/fish.rs": [
+  "crates/core/flags/complete/fish.rs": [
     {
       "line": 17,
       "original": "\"-s {}\"",
-      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_s\")",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_s_2\")",
       "context": "Some(byte) => format!(\"-s {}\", char::from(byte)),"
+    }
+  ],
+  "crates/core/flags/complete/bash.rs": [
+    {
+      "line": 97,
+      "original": "\"--{negated}\"",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_negated_2\")",
+      "context": "let name = format!(\"--{negated}\");"
+    }
+  ],
+  "crates/core/flags/doc/man.rs": [
+    {
+      "line": 105,
+      "original": "\"This flag can be disabled with \\fB\\-\\-{negated}\\fP.\"",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"this_flag_can_be_2\")",
+      "context": "r\"This flag can be disabled with \\fB\\-\\-{negated}\\fP.\""
+    }
+  ],
+  "crates/core/flags/doc/version.rs": [
+    {
+      "line": 72,
+      "original": "\"PCRE2 is not available in this build of ripgrep.\"",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"pcre2_is_not_available_2\")",
+      "context": "writeln!(out, \"PCRE2 is not available in this build of ripgrep.\")"
+    }
+  ],
+  "crates/core/flags/doc/help.rs": [
+    {
+      "line": 245,
+      "original": "\"{line}:\"",
+      "replacement": "fl!(crate::i18n::LANGUAGE_LOADER, \"fmt_line_2\")",
+      "context": "lines.push(format!(\"{line}:\"));"
     }
   ]
 }

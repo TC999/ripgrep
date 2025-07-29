@@ -11,6 +11,8 @@ use std::{io, path::Path};
 
 use {grep::matcher::Matcher, termcolor::WriteColor};
 
+use crate::i18n::fl;
+
 /// The configuration for the search worker.
 ///
 /// Among a few other things, the configuration primarily controls the way we
@@ -306,16 +308,15 @@ impl<W: WriteColor> SearchWorker<W> {
         let mut rdr = self.command_builder.build(&mut cmd).map_err(|err| {
             io::Error::new(
                 io::ErrorKind::Other,
-                format!(
-                    "preprocessor command could not start: '{:?}': {}",
-                    cmd, err,
-                ),
+                fl!(crate::i18n::LANGUAGE_LOADER, "fmt_preprocessor_command_could_not", 
+                    cmd = format!("{:?}", cmd), err = err.to_string())
             )
         })?;
         let result = self.search_reader(path, &mut rdr).map_err(|err| {
             io::Error::new(
                 io::ErrorKind::Other,
-                format!("preprocessor command failed: '{:?}': {}", cmd, err),
+                fl!(crate::i18n::LANGUAGE_LOADER, "fmt_preprocessor_command_failed",
+                    cmd = format!("{:?}", cmd), err = err.to_string())
             )
         });
         let close_result = rdr.close();
