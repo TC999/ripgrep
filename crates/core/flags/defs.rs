@@ -21,6 +21,8 @@ use std::path::PathBuf;
 
 use {anyhow::Context as AnyhowContext, bstr::ByteVec};
 
+use crate::i18n::fl;
+
 use crate::flags::{
     lowargs::{
         BinaryMode, BoundaryMode, BufferMode, CaseMode, ColorChoice,
@@ -766,7 +768,7 @@ the \flag{colors} flag to manually set all color styles to \fBnone\fP:
             "auto" => ColorChoice::Auto,
             "always" => ColorChoice::Always,
             "ansi" => ColorChoice::Ansi,
-            unk => anyhow::bail!("choice '{unk}' is unrecognized"),
+            unk => anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_choice_unk_is_unrecognized", unk = unk)),
         };
         Ok(())
     }
@@ -1700,7 +1702,7 @@ flags.
             "default" => EngineChoice::Default,
             "pcre2" => EngineChoice::PCRE2,
             "auto" => EngineChoice::Auto,
-            _ => anyhow::bail!("unrecognized regex engine '{string}'"),
+            _ => anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_unrecognized_regex_engine_string", string = string)),
         };
         Ok(())
     }
@@ -7474,16 +7476,18 @@ mod convert {
 
     use anyhow::Context;
 
+    use crate::i18n::fl;
+
     pub(super) fn str(v: &OsStr) -> anyhow::Result<&str> {
         let Some(s) = v.to_str() else {
-            anyhow::bail!("value is not valid UTF-8")
+            anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_value_is_not_valid"))
         };
         Ok(s)
     }
 
     pub(super) fn string(v: OsString) -> anyhow::Result<String> {
         let Ok(s) = v.into_string() else {
-            anyhow::bail!("value is not valid UTF-8")
+            anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_value_is_not_valid"))
         };
         Ok(s)
     }
@@ -7503,7 +7507,7 @@ mod convert {
     pub(super) fn human_readable_usize(v: &OsStr) -> anyhow::Result<usize> {
         let size = human_readable_u64(v)?;
         let Ok(size) = usize::try_from(size) else {
-            anyhow::bail!("size is too big")
+            anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_size_is_too_big"))
         };
         Ok(size)
     }

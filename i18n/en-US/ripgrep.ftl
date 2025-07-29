@@ -11,17 +11,25 @@ stats_bytes_searched = bytes searched
 stats_search_time = seconds spent searching
 stats_process_time = seconds
 # Auto-generated translations
-error_unrecognized_flag_name = unrecognized flag -{name}
-error_msg = {msg}
+error_unrecognized_flag_name = unrecognized flag -{$name}
+error_msg = {$msg}
 error_separator_must_be_valid = separator must be valid UTF-8 (use escape sequences \
                  to provide a separator that is not valid UTF-8)
-error_sorting_by_last_modified = sorting by last modified isn't supported: {err}
-error_sorting_by_last_accessed = sorting by last accessed isn't supported: {err}
-error_sorting_by_creation_time = sorting by creation time isn't supported: {err}
-error_choice_unk_is_unrecognized = choice '{unk}' is unrecognized
-error_unrecognized_regex_engine_string = unrecognized regex engine '{string}'
+error_sorting_by_last_modified = sorting by last modified isn't supported: {$err}
+error_sorting_by_last_accessed = sorting by last accessed isn't supported: {$err}
+error_sorting_by_creation_time = sorting by creation time isn't supported: {$err}
+error_choice_unk_is_unrecognized = choice '{$unk}' is unrecognized
+error_unrecognized_regex_engine_string = unrecognized regex engine '{$string}'
 error_value_is_not_valid = value is not valid UTF-8
 error_size_is_too_big = size is too big
+fmt_unrecognized_flag_name = unrecognized flag --{$name}
+fmt_msgnnsuggestmsg = {$msg}
+
+{$suggest_msg}
+fmt_missing_value_for_flag = missing value for flag {$mat}
+fmt_error_parsing_flag_mat = error parsing flag {$mat}
+fmt_name = --{$name}
+fmt_similar_flags_that_are = similar flags that are available: {$list}
 error_error_while_loading_language = Error while loading language for locale: {}
 error_usage_simplegrep_pattern_path = Usage: simplegrep <pattern> [<path> ...]
 fmt_06s = {:0.6}s

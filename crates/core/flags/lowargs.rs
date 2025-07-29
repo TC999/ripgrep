@@ -12,6 +12,8 @@ use {
     grep::printer::{HyperlinkFormat, UserColorSpec},
 };
 
+use crate::i18n::fl;
+
 /// A collection of "low level" arguments.
 ///
 /// The "low level" here is meant to constrain this type to be as close to the
@@ -503,8 +505,7 @@ impl ContextSeparator {
     pub(crate) fn new(os: &OsStr) -> anyhow::Result<ContextSeparator> {
         let Some(string) = os.to_str() else {
             anyhow::bail!(
-                "separator must be valid UTF-8 (use escape sequences \
-                 to provide a separator that is not valid UTF-8)"
+                fl!(crate::i18n::LANGUAGE_LOADER, "error_separator_must_be_valid")
             )
         };
         Ok(ContextSeparator(Some(Vec::unescape_bytes(string).into())))
@@ -718,7 +719,7 @@ impl SortMode {
                     .and_then(|md| md.modified());
                 let Err(err) = md else { return Ok(()) };
                 anyhow::bail!(
-                    "sorting by last modified isn't supported: {err}"
+                    fl!(crate::i18n::LANGUAGE_LOADER, "error_sorting_by_last_modified", err = err.to_string())
                 );
             }
             SortModeKind::LastAccessed => {
@@ -727,7 +728,7 @@ impl SortMode {
                     .and_then(|md| md.accessed());
                 let Err(err) = md else { return Ok(()) };
                 anyhow::bail!(
-                    "sorting by last accessed isn't supported: {err}"
+                    fl!(crate::i18n::LANGUAGE_LOADER, "error_sorting_by_last_accessed", err = err.to_string())
                 );
             }
             SortModeKind::Created => {
@@ -736,7 +737,7 @@ impl SortMode {
                     .and_then(|md| md.created());
                 let Err(err) = md else { return Ok(()) };
                 anyhow::bail!(
-                    "sorting by creation time isn't supported: {err}"
+                    fl!(crate::i18n::LANGUAGE_LOADER, "error_sorting_by_creation_time", err = err.to_string())
                 );
             }
         }

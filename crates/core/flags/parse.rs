@@ -6,6 +6,8 @@ use std::{borrow::Cow, collections::BTreeSet, ffi::OsString};
 
 use anyhow::Context;
 
+use crate::i18n::fl;
+
 use crate::flags::{
     defs::FLAGS,
     hiargs::HiArgs,
@@ -260,14 +262,14 @@ impl Parser {
             let mat = match lookup {
                 FlagLookup::Match(mat) => mat,
                 FlagLookup::UnrecognizedShort(name) => {
-                    anyhow::bail!("unrecognized flag -{name}")
+                    anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_unrecognized_flag_name", name = name.to_string()))
                 }
                 FlagLookup::UnrecognizedLong(name) => {
-                    let mut msg = format!("unrecognized flag --{name}");
+                    let mut msg = fl!(crate::i18n::LANGUAGE_LOADER, "fmt_unrecognized_flag_name", name = name.clone());
                     if let Some(suggest_msg) = suggest(&name) {
-                        msg = format!("{msg}\n\n{suggest_msg}");
+                        msg = fl!(crate::i18n::LANGUAGE_LOADER, "fmt_msgnnsuggestmsg", msg = msg, suggest_msg = suggest_msg);
                     }
-                    anyhow::bail!("{msg}")
+                    anyhow::bail!(fl!(crate::i18n::LANGUAGE_LOADER, "error_msg", msg = msg))
                 }
             };
             let value = if matches!(mat.kind, FlagInfoKind::Negated) {
@@ -279,12 +281,12 @@ impl Parser {
                 FlagValue::Switch(true)
             } else {
                 FlagValue::Value(p.value().with_context(|| {
-                    format!("missing value for flag {mat}")
+                    fl!(crate::i18n::LANGUAGE_LOADER, "fmt_missing_value_for_flag", mat = mat.to_string())
                 })?)
             };
             mat.flag
                 .update(value, args)
-                .with_context(|| format!("error parsing flag {mat}"))?;
+                .with_context(|| fl!(crate::i18n::LANGUAGE_LOADER, "fmt_error_parsing_flag_mat", mat = mat.to_string()))?;
         }
         Ok(())
     }
@@ -408,10 +410,10 @@ fn suggest(unrecognized: &str) -> Option<String> {
     }
     let list = similars
         .into_iter()
-        .map(|name| format!("--{name}"))
+        .map(|name| fl!(crate::i18n::LANGUAGE_LOADER, "fmt_name", name = name.to_string()))
         .collect::<Vec<String>>()
         .join(", ");
-    Some(format!("similar flags that are available: {list}"))
+    Some(fl!(crate::i18n::LANGUAGE_LOADER, "fmt_similar_flags_that_are", list = list))
 }
 
 /// Return a sequence of names similar to the unrecognized name given.
