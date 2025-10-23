@@ -3,6 +3,24 @@ TBD
 Unreleased changes. Release notes have not yet been written.
 
 
+15.1.0
+======
+This is a small release that fixes a bug with how ripgrep handles line
+buffering. This might manifest as ripgrep printing output later than you
+expect or not working correctly with `tail -f` (even if you're using the
+`--line-buffered` flag).
+
+Bug fixes:
+
+* [BUG #3194](https://github.com/BurntSushi/ripgrep/issues/3194):
+  Fix a regression with `--line-buffered` introduced in ripgrep 15.0.0.
+
+Feature enhancements:
+
+* [FEATURE #3192](https://github.com/BurntSushi/ripgrep/pull/3192):
+  Add hyperlink alias for Cursor.
+
+
 15.0.0 (2025-10-15)
 ===================
 ripgrep 15 is a new major version release of ripgrep that mostly has bug fixes,
@@ -37,8 +55,6 @@ Performance improvements:
   Don't resolve helper binaries on Windows when `-z/--search-zip` isn't used.
 * [PERF #2865](https://github.com/BurntSushi/ripgrep/pull/2865):
   Avoid using path canonicalization on Windows when emitting hyperlinks.
-* [PERF #3184](https://github.com/BurntSushi/ripgrep/pull/3184):
-  Improve performance of large values with `-A/--after-context`.
 
 Bug fixes:
 
