@@ -21,6 +21,7 @@ static LOCALES: OnceLock<Localization> = OnceLock::new();
 /// Holds the localization resources and bundle.
 pub struct Localization {
     bundle: FluentBundle<FluentResource>,
+    #[allow(dead_code)]
     locale: LanguageIdentifier,
 }
 
@@ -69,6 +70,7 @@ impl Localization {
     }
     
     /// Get the current locale.
+    #[allow(dead_code)]
     pub fn locale(&self) -> &LanguageIdentifier {
         &self.locale
     }
@@ -174,11 +176,13 @@ pub fn get_message(id: &str) -> Option<String> {
 /// Get a localized message by its ID, with a fallback default.
 ///
 /// If the message ID is not found, returns the provided default value.
+#[allow(dead_code)]
 pub fn get_message_or(id: &str, default: &str) -> String {
     get_message(id).unwrap_or_else(|| default.to_string())
 }
 
 /// Get the current locale.
+#[allow(dead_code)]
 pub fn current_locale() -> Option<&'static LanguageIdentifier> {
     LOCALES.get().map(|l| l.locale())
 }
