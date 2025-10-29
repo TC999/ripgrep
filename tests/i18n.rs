@@ -1,5 +1,10 @@
 /*!
 Tests for i18n (internationalization) functionality.
+
+Note: These tests use `unsafe` environment variable manipulation and are
+intentionally simple. In production, i18n is initialized once at startup
+before any concurrency, so race conditions are not a concern. These tests
+primarily serve as documentation of the i18n feature.
 */
 
 use std::env;
@@ -7,6 +12,9 @@ use std::env;
 #[test]
 fn i18n_english_default() {
     // Test that English is the default locale
+    // Note: This uses unsafe environment manipulation, but since i18n is
+    // initialized once per process before any parallel work, this is safe
+    // in the actual application.
     unsafe {
         env::remove_var("RG_LANG");
         env::remove_var("LANG");
@@ -26,6 +34,7 @@ fn i18n_english_default() {
 #[test]
 fn i18n_chinese_locale() {
     // Test that Chinese locale can be set via RG_LANG
+    // Note: See safety comment above about environment variables
     unsafe {
         env::set_var("RG_LANG", "zh-CN");
     }
@@ -38,6 +47,7 @@ fn i18n_chinese_locale() {
 #[test]
 fn i18n_fallback_to_english() {
     // Test that an unknown locale falls back to English
+    // Note: See safety comment above about environment variables
     unsafe {
         env::set_var("RG_LANG", "xx-YY");
     }

@@ -48,7 +48,7 @@ impl Localization {
         // Load the fluent resources for the selected locale
         if let Some(resource) = load_locale_resource(&locale) {
             if let Err(errors) = bundle.add_resource(resource) {
-                eprintln!("Failed to add resource: {:?}", errors);
+                eprintln!("Warning: Failed to load translations for locale '{}': {:?}", locale, errors);
             }
         }
         
@@ -63,7 +63,7 @@ impl Localization {
         let value = self.bundle.format_pattern(pattern, None, &mut errors);
         
         if !errors.is_empty() {
-            eprintln!("Localization errors for '{}': {:?}", id, errors);
+            eprintln!("Warning: Errors formatting message '{}': {:?}", id, errors);
         }
         
         Some(value.to_string())
@@ -156,8 +156,21 @@ fn load_locale_resource(locale: &LanguageIdentifier) -> Option<FluentResource> {
     let locale_str = locale.to_string();
     let ftl_path = locales_dir.join(&locale_str).join("main.ftl");
     
-    let content = fs::read_to_string(&ftl_path).ok()?;
-    FluentResource::try_new(content).ok()
+    let content = match fs::read_to_string(&ftl_path) {
+        Ok(content) => content,
+        Err(err) => {
+            eprintln!("Warning: Could not read translation file for locale '{}': {}", locale_str, err);
+            return None;
+        }
+    };
+    
+    match FluentResource::try_new(content) {
+        Ok(resource) => Some(resource),
+        Err((_, errors)) => {
+            eprintln!("Warning: Failed to parse translation file for locale '{}': {:?}", locale_str, errors);
+            None
+        }
+    }
 }
 
 /// Initialize the global localization system.
