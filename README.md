@@ -27,6 +27,7 @@ Please see the [CHANGELOG](CHANGELOG.md) for a release history.
 * [Regex syntax](https://docs.rs/regex/1/regex/#syntax)
 * [Configuration files](GUIDE.md#configuration-file)
 * [Shell completions](FAQ.md#complete)
+* [Internationalization (i18n)](I18N.md)
 * [Building](#building)
 * [Translations](#translations)
 

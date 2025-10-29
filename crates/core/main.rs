@@ -13,6 +13,7 @@ mod messages;
 
 mod flags;
 mod haystack;
+mod i18n;
 mod logger;
 mod search;
 
@@ -41,6 +42,9 @@ static ALLOC: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
 
 /// Then, as it was, then again it will be.
 fn main() -> ExitCode {
+    // Initialize i18n support
+    i18n::init();
+    
     match run(flags::parse()) {
         Ok(code) => code,
         Err(err) => {

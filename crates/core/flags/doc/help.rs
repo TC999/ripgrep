@@ -9,6 +9,7 @@ is used when the `--help` flag is given.
 use std::{collections::BTreeMap, fmt::Write};
 
 use crate::flags::{Category, Flag, defs::FLAGS, doc::version};
+use crate::i18n;
 
 const TEMPLATE_SHORT: &'static str = include_str!("template.short.help");
 const TEMPLATE_LONG: &'static str = include_str!("template.long.help");
@@ -36,6 +37,8 @@ pub(crate) fn generate_short() -> String {
     }
     let mut out =
         TEMPLATE_SHORT.replace("!!VERSION!!", &version::generate_digits());
+    // Apply i18n to template
+    out = apply_i18n_to_template(&out);
     for (cat, (col1, col2)) in cats.iter() {
         let var = format!("!!{name}!!", name = cat.as_str());
         let val = format_short_columns(col1, col2, maxcol1, maxcol2);
@@ -120,6 +123,8 @@ pub(crate) fn generate_long() -> String {
 
     let mut out =
         TEMPLATE_LONG.replace("!!VERSION!!", &version::generate_digits());
+    // Apply i18n to template
+    out = apply_i18n_to_template(&out);
     for (cat, value) in cats.iter() {
         let var = format!("!!{name}!!", name = cat.as_str());
         out = out.replace(&var, value);
@@ -256,4 +261,78 @@ fn remove_roff(v: &str) -> String {
         .replace(r"\fP", "")
         .replace(r"\-", "-")
         .replace(r"\\", r"\")
+}
+
+/// Apply i18n to the help template by replacing static text with localized versions.
+fn apply_i18n_to_template(template: &str) -> String {
+    // Replace the description
+    let template = i18n::get_message("app-description")
+        .map(|msg| {
+            template.replace(
+                "ripgrep (rg) recursively searches the current directory for lines matching\n\
+                 a regex pattern. By default, ripgrep will respect gitignore rules and\n\
+                 automatically skip hidden files/directories and binary files.",
+                &msg
+            )
+        })
+        .unwrap_or_else(|| template.to_string());
+    
+    // Replace help hint
+    let template = i18n::get_message("help-hint")
+        .map(|msg| {
+            template.replace(
+                "Use -h for short descriptions and --help for more details.",
+                &msg
+            )
+        })
+        .unwrap_or_else(|| template.to_string());
+    
+    // Replace project home
+    let template = i18n::get_message("project-home")
+        .map(|msg| {
+            template.replace(
+                "Project home page: https://github.com/BurntSushi/ripgrep",
+                &msg
+            )
+        })
+        .unwrap_or_else(|| template.to_string());
+    
+    // Replace section headers
+    let template = i18n::get_message("usage-header")
+        .map(|msg| template.replace("USAGE:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    let template = i18n::get_message("positional-args-header")
+        .map(|msg| template.replace("POSITIONAL ARGUMENTS:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    let template = i18n::get_message("input-options-header")
+        .map(|msg| template.replace("INPUT OPTIONS:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    let template = i18n::get_message("search-options-header")
+        .map(|msg| template.replace("SEARCH OPTIONS:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    let template = i18n::get_message("filter-options-header")
+        .map(|msg| template.replace("FILTER OPTIONS:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    let template = i18n::get_message("output-options-header")
+        .map(|msg| template.replace("OUTPUT OPTIONS:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    let template = i18n::get_message("output-modes-header")
+        .map(|msg| template.replace("OUTPUT MODES:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    let template = i18n::get_message("logging-options-header")
+        .map(|msg| template.replace("LOGGING OPTIONS:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    let template = i18n::get_message("other-behaviors-header")
+        .map(|msg| template.replace("OTHER BEHAVIORS:", &msg))
+        .unwrap_or_else(|| template.to_string());
+    
+    template
 }
